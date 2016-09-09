@@ -108,7 +108,7 @@
 */
 
 #define  APP_SERIAL_CFG_TRACE_EN                DEF_ENABLED
-#define  APP_SERIAL_CFG_TRACE_PORT_NAME         "USART3"
+#define  APP_SERIAL_CFG_TRACE_PORT_NAME         "USART1"
 
 
 /*

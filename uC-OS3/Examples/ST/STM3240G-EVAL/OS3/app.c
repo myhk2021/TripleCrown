@@ -488,7 +488,7 @@ static  void  AppTaskObj0 (void  *p_arg)
         OSTimeDlyHMSM( 0u, 0u, 0u, 10u,
                        OS_OPT_TIME_HMSM_STRICT,
                       &os_err);
-        APP_TRACE_INFO(("Object test task 0 running ....\n"));
+//        APP_TRACE_INFO(("Object test task 0 running ....\n"));
     }
 }
 
@@ -560,7 +560,7 @@ static  void  AppTaskObj1 (void  *p_arg)
         OSTimeDlyHMSM( 0u, 0u, 0u, 10u,
                        OS_OPT_TIME_HMSM_STRICT,
                       &os_err);
-        APP_TRACE_INFO(("Object test task 1 running ....\n"));
+//        APP_TRACE_INFO(("Object test task 1 running ....\n"));
     }
 }
 
@@ -604,17 +604,17 @@ void  AppTaskEq0Fp (void  *p_arg)
             delta = delta * -1.0;
         }
 
-        while (((2.00 * eps) < delta) ||
+        while ((((CPU_FP32)2.00 * eps) < delta) ||
                (iteration    > 20u  )) {
-            c   = (a + b) / 2.00;
-            f_a = (exp((-1.0) * a) * (3.2 * sin(a) - 0.5 * cos(a)));
-            f_c = (exp((-1.0) * c) * (3.2 * sin(c) - 0.5 * cos(c)));
+            c   = (a + b) / (CPU_FP32)2.00;
+            f_a = (exp((CPU_FP32)(-1.0) * a) * ((CPU_FP32)3.2 * sin(a) - (CPU_FP32)0.5 * cos(a)));
+            f_c = (exp((CPU_FP32)(-1.0) * c) * ((CPU_FP32)3.2 * sin(c) - (CPU_FP32)0.5 * cos(c)));
 
-            if (((f_a > 0.0) && (f_c < 0.0)) ||
-                ((f_a < 0.0) && (f_c > 0.0))) {
+            if (((f_a > (CPU_FP32)0.0) && (f_c < (CPU_FP32)0.0)) ||
+                ((f_a < (CPU_FP32)0.0) && (f_c > (CPU_FP32)0.0))) {
                 b = c;
-            } else if (((f_a > 0.0) && (f_c > 0.0)) ||
-                       ((f_a < 0.0) && (f_c < 0.0))) {
+            } else if (((f_a > (CPU_FP32)0.0) && (f_c > (CPU_FP32)0.0)) ||
+                       ((f_a < (CPU_FP32)0.0) && (f_c < (CPU_FP32)0.0))) {
                 a = c;
             } else {
                 break;
@@ -639,13 +639,13 @@ void  AppTaskEq0Fp (void  *p_arg)
             }
         }
 
-        APP_TRACE_INFO(("Eq0 Task Running ....\n"));
+//        APP_TRACE_INFO(("Eq0 Task Running ....\n"));
 
         if (iteration == APP_TASK_EQ_0_ITERATION_NBR) {
 #if 0                                                           /* See Note 1.                                         */
             APP_TRACE_INFO(("Root = %f; f(c) = %f; #iterations : %d\n", c, f_c, iteration));
 #else
-            APP_TRACE_INFO(("Eq0 task; #iterations : %d\n", iteration));
+//            APP_TRACE_INFO(("Eq0 task; #iterations : %d\n", iteration));
 #endif
         }
     }
@@ -693,16 +693,16 @@ void  AppTaskEq1Fp (void  *p_arg)
             delta = delta * -1.0;
         }
 
-        while ((2.00 * eps) < delta) {
-            c   = (a + b) / 2.0;
-            f_a = a * a - 3.0;
-            f_c = c * c - 3.0;
+        while (((CPU_FP32)2.00 * eps) < delta) {
+            c   = (a + b) / (CPU_FP32)2.0;
+            f_a = a * a - (CPU_FP32)3.0;
+            f_c = c * c - (CPU_FP32)3.0;
 
-            if (((f_a > 0.0) && (f_c < 0.0)) ||
-                ((f_a < 0.0) && (f_c > 0.0))) {
+            if (((f_a > (CPU_FP32)0.0) && (f_c < (CPU_FP32)0.0)) ||
+                ((f_a < (CPU_FP32)0.0) && (f_c > (CPU_FP32)0.0))) {
                 b = c;
-            } else if (((f_a > 0.0) && (f_c > 0.0)) ||
-                       ((f_a < 0.0) && (f_c < 0.0))) {
+            } else if (((f_a > (CPU_FP32)0.0) && (f_c > (CPU_FP32)0.0)) ||
+                       ((f_a < (CPU_FP32)0.0) && (f_c < (CPU_FP32)0.0))) {
                 a = c;
             } else {
                 break;
@@ -727,13 +727,13 @@ void  AppTaskEq1Fp (void  *p_arg)
             }
         }
 
-        APP_TRACE_INFO(("Eq1 Task Running ....\n"));
+//        APP_TRACE_INFO(("Eq1 Task Running ....\n"));
 
         if (iteration == APP_TASK_EQ_1_ITERATION_NBR) {
 #if 0                                                           /* See Note 1.                                         */
             APP_TRACE_INFO(("Root = %f; f(c) = %f; #iterations : %d\n", c, f_c, iteration));
 #else
-            APP_TRACE_INFO(("Eq1 task; #iterations : %d\n", iteration));
+//            APP_TRACE_INFO(("Eq1 task; #iterations : %d\n", iteration));
 #endif
         }
     }

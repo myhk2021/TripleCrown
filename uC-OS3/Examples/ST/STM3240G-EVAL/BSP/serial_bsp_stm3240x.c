@@ -263,6 +263,9 @@ static  SERIAL_DEV  *SerialDev_STM32_USART6_DevPtr;
 
 static  void  SerialBSP_STM32_USART1_ClkEn (SERIAL_ERR  *perr)
 {
+    BSP_PeriphEn(BSP_PERIPH_ID_GPIOA);                          /* Enable GPIOC clock.                                  */
+    BSP_PeriphEn(BSP_PERIPH_ID_USART1);                         /* Enable UART clock.                                   */
+
    *perr = SERIAL_ERR_NONE;
 }
 
@@ -314,7 +317,9 @@ static  void  SerialBSP_STM32_USART6_ClkEn (SERIAL_ERR  *perr)
 
 static  void  SerialBSP_STM32_USART1_ClkDis (SERIAL_ERR  *perr)
 {
-   *perr = SERIAL_ERR_NONE;
+    BSP_PeriphDis(BSP_PERIPH_ID_USART1);                        /* Disable UART clock.                                   */
+
+    *perr = SERIAL_ERR_NONE;
 }
 
 static  void  SerialBSP_STM32_USART2_ClkDis (SERIAL_ERR  *perr)
@@ -369,10 +374,27 @@ static  void  SerialBSP_STM32_USART6_ClkDis (SERIAL_ERR  *perr)
 static  void  SerialBSP_STM32_USART1_CfgGPIO (CPU_BOOLEAN   flow_ctrl,
                                               SERIAL_ERR   *perr)
 {
+    GPIO_InitTypeDef  GPIO_InitStructure;
+
+
     if (flow_ctrl == DEF_ENABLED) {
         *perr = SERIAL_ERR_DRV_INVALID;
          return;
     }
+
+                                                                /* Configure GPIOC.10 as push-pull.                     */
+    GPIO_InitStructure.Pin       = GPIO_PIN_9;
+    GPIO_InitStructure.Speed     = GPIO_SPEED_FAST;
+    GPIO_InitStructure.Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.Pull      = GPIO_PULLUP;
+    GPIO_InitStructure.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+                                                                /* Configure GPIOC.11 as input floating.                 */
+    GPIO_InitStructure.Pin       = GPIO_PIN_10;
+    GPIO_InitStructure.Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
    *perr = SERIAL_ERR_NONE;
 }

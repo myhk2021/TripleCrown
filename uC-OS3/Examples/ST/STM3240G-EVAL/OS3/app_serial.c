@@ -98,8 +98,8 @@ CPU_BOOLEAN  App_SerialInit (void)
 
     Serial_Init();                                             /* Initial Serial module                                */
 
-    Serial_DevDrvAdd((CPU_CHAR       *)"USART3",               /* Add serial interface/device.                         */
-                     (SERIAL_DEV_CFG *)&SerialDevCfg_STM32_USART3,
+    Serial_DevDrvAdd((CPU_CHAR       *)"USART1",               /* Add serial interface/device.                         */
+                     (SERIAL_DEV_CFG *)&SerialDevCfg_STM32_USART1,
                      (CPU_SIZE_T      ) 52u,
                      (CPU_SIZE_T      ) 52u,
                      (SERIAL_ERR     *)&err);
